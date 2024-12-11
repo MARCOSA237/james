@@ -1,11 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const userRouter = require('./routes/user.route');
+
+require('dotenv').config();
+require('./libs/dbConnect');
 
 const app = express();
+
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
+
 
 
 app.get('/', (req, res) => {
@@ -24,3 +31,4 @@ const PORT = 3000;
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`);
 });
+app.use('/users', userRouter);
